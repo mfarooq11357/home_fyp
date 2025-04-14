@@ -1,162 +1,176 @@
 import React from "react";
-import { UserCircle } from 'lucide-react';
 
-const home = () => {
+export default function HeroSection() {
   return (
-    <section className=" bg-black text-white">
-      <div className="container mx-auto px-4 py-6 md:py-12">
-        <div className="grid gap-8 md:grid-cols-2 md:gap-12 items-center">
-          {/* Left Column */}
-          <div className="space-y-6 text-center md:text-left">
-            <h1 className="text-2xl md:text-5xl font-bold tracking-tight">
-              <span className="text-yellow-400">CONNECTING, COMMUNITIES,</span>
-              <br />
-              <span className="text-yellow-400">Empowering Growth</span>
+    <section className="w-full py-12 md:py-16 lg:py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <div className="w-full md:w-1/2 space-y-4  md:space-y-8 mb-12">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#2D50A1] leading-tight">
+              CONNECTING, COMMUNITIES,
+              <span className="block">Empowering Growth</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-300 max-w-lg mx-auto md:mx-0">
-              "Your gateway to seamless event management, meaningful alumni connections, and hassle-free certifications."
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-lg">
+              Your gateway to seamless event management, meaningful alumni connections, and hassle-free certifications.
             </p>
 
-            <div className=" pt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a
-                href="/register"
-                className="bg-[#9dff2c] hover:bg-[#8ce626] text-black font-semibold text-lg px-8 py-2 rounded-lg text-center"
-              >
-                Register
-              </a>
-              <a
-                href="/login"
-                className="bg-[#9dff2c] hover:bg-[#8ce626] text-black font-semibold text-lg px-8 py-2  rounded-lg text-center"
-              >
-                Login
-              </a>
-            </div>
+            <button className="px-6 py-2 border border-[#2D50A1] text-blue-700 rounded-md hover:bg-[#2D50A1] hover:text-white transition-colors duration-300 text-sm sm:text-base">
+              Register now
+            </button>
           </div>
 
-          {/* Right Column */}
-          <div className="space-y-4">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+          {/* Right Content - Image */}
+          <div className="w-full md:w-1/2 flex flex-col items-center">
+            <div className="relative w-full aspect-[5/3] rounded-lg overflow-hidden shadow-lg">
               <img
-                src="/assets/image 4.png"
-                alt="Celebrating Excellence Ceremony"
-                className="object-cover w-full h-full"
+                src="https://i.ibb.co/Lhr7b7Tk/image-4-Picsart-Ai-Image-Enhancer.png"
+                alt="Celebrating Excellence"
+                className="object-cover absolute inset-0 w-full h-full"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            <div className="space-y-2 text-center md:text-left">
-              <h2 className="text-xl md:text-2xl font-semibold text-yellow-400">
-                "Celebrating Excellence: Recognizing Achievements"
-              </h2>
-              <p className="text-gray-300">Se Society Management System</p>
-              <p className="text-sm text-gray-400">
-                "This ceremony celebrates the outstanding contributions in academics, research, and community service."
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <section className="bg-black py-16 px-4">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-12 text-left">
-          Our Teams
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Team Member 1 */}
-          <div className="bg-white rounded-lg p-6 text-center shadow-lg transition-transform transform hover:scale-105">
-            <div className="flex justify-center mb-6">
-              <div className="bg-yellow-400 rounded-full p-8 inline-block">
-                <UserCircle className="w-16 h-16 text-black" />
-              </div>
-            </div>
-            <h3 className="text-xl font-bold text-black mb-4">Dr Ahmed Ali</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              A visionary leader and researcher with over 20 years of experience in healthcare innovation. Dr. Ahmed has contributed to groundbreaking medical solutions, inspiring countless professionals worldwide.
-            </p>
-          </div>
-
-          {/* Team Member 2 */}
-          <div className="bg-white rounded-lg p-6 text-center shadow-lg transition-transform transform hover:scale-105">
-            <div className="flex justify-center mb-6">
-              <div className="bg-yellow-400 rounded-full p-8 inline-block">
-                <UserCircle className="w-16 h-16 text-black" />
-              </div>
-            </div>
-            <h3 className="text-xl font-bold text-black mb-4">Dr Umer Farooq</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              An accomplished academic and mentor. Dr Umer has transformed education through his passion for teaching and commitment to student success. His innovative methods continue to shape future leaders.
-            </p>
-          </div>
-
-          {/* Team Member 3 */}
-          <div className="bg-white rounded-lg p-6 text-center shadow-lg transition-transform transform hover:scale-105">
-            <div className="flex justify-center mb-6">
-              <div className="bg-yellow-400 rounded-full p-8 inline-block">
-                <UserCircle className="w-16 h-16 text-black" />
-              </div>
-            </div>
-            <h3 className="text-xl font-bold text-black mb-4">Dr Shazaib Khan</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              A technology enthusiast and entrepreneur. Dr Shazaib has successfully bridged the gap between IT and medicine. His efforts have revolutionized patient care and hospital management systems.
+            <p className="mt-3 text-sm sm:text-base text-blue-700 font-medium text-center">
+              "Celebrating Excellence: Recognizing Achievements"
             </p>
           </div>
         </div>
       </div>
-    </section>
-     <section className="bg-black text-white py-16 px-4">
-      <div className="container mx-auto max-w-7xl">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Text Content */}
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-yellow-400">
-              "Unlock Opportunities with Us"
-            </h2>
-            
-            <div className="space-y-4 text-gray-300">
-              <p>
-                Efficient tools to manage society events, memberships, and activities in
-                one place. Plan, organize, and track events effortlessly with our intuitive
-                calendar.
-              </p>
-              
-              <p>
-                Centralized platform for managing members and sending
-                real-time updates. Foster teamwork with discussion boards and
-                collaborative features for society leaders.
-              </p>
-              
-              <p>
-                Celebrate achievements with
-                badges, leaderboards, and recognition programs. Personalized views
-                for administrators, society leaders, and members to streamline access.
-              </p>
-            </div>
-          </div>
 
-          {/* Logo/Graphic */}
-          <div className="flex justify-center md:justify-end">
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  {/* <span className="block text-4xl md:text-5xl font-bold">
-        
-                  </span> */}
-                   <div className="relative  w-full overflow-hidden rounded-lg">
-              <img
-                src="/assets/image 8.png"
-                alt="Celebrating Excellence Ceremony"
-                className="object-cover w-full h-full"
-              />
-            </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+
+
+
+{/* 
+      <div className="flex flex-row overflow-hidden rounded-xl shadow-lg max-w-2xl bg-white h-[170x] text-sm">
+  <div className="bg-blue-700 w-full md:w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+    <img 
+      src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+      className="w-full h-full object-cover object-center"
+    />
+  </div>
+  <div className="w-full md:w-2/3 p-4 flex flex-col justify-center">
+    <h3 className="font-bold mb-1 text-gray-900">Personalized Views</h3>
+    <p className="text-gray-700 text-xs">
+      Streamlined, role-based access tailored for admins, leaders, and members.
+    </p>
+  </div>
+</div> */}
+
+<section className="container mx-auto px-4 py-12">
+  <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">What We Offer</h2>
+  
+  <div className="flex flex-col md:flex-row gap-6">
+    {/* First Column */}
+    <div className="md:w-1/2 flex flex-col gap-6">
+      {/* Event Management Card */}
+      <div className="flex overflow-hidden rounded-xl shadow-lg bg-white h-[170px] hover:shadow-xl transition-shadow">
+        <div className="bg-blue-700 w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+          <img 
+            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            className="w-full h-full object-cover object-center"
+            alt="Event management"
+          />
+        </div>
+        <div className="w-2/3 p-4 flex flex-col justify-center">
+          <h3 className="font-bold mb-1 text-gray-900">Event Management</h3>
+          <p className="text-gray-700 text-xs">
+            Plan, organize, and track events effortlessly with our intuitive calendar.
+          </p>
         </div>
       </div>
-    </section>
+
+      {/* Recognition & Achievements Card */}
+      <div className="flex overflow-hidden rounded-xl shadow-lg bg-white h-[170px] hover:shadow-xl transition-shadow">
+        <div className="bg-blue-700 w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+          <img 
+            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            className="w-full h-full object-cover object-center"
+            alt="Achievements"
+          />
+        </div>
+        <div className="w-2/3 p-4 flex flex-col justify-center">
+          <h3 className="font-bold mb-1 text-gray-900">Recognition & Achievements</h3>
+          <p className="text-gray-700 text-xs">
+            Celebrate society milestones with badges, leaderboards, and recognition programs.
+          </p>
+        </div>
+      </div>
+
+      {/* Personalized Views Card */}
+      <div className="flex overflow-hidden rounded-xl shadow-lg bg-white h-[170px] hover:shadow-xl transition-shadow">
+        <div className="bg-blue-700 w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+          <img 
+            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            className="w-full h-full object-cover object-center"
+            alt="Personalized views"
+          />
+        </div>
+        <div className="w-2/3 p-4 flex flex-col justify-center">
+          <h3 className="font-bold mb-1 text-gray-900">Personalized Views</h3>
+          <p className="text-gray-700 text-xs">
+            Streamlined, role-based access tailored for admins, leaders, and members.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Second Column */}
+    <div className="md:w-1/2 flex flex-col gap-6">
+      {/* Membership Management Card */}
+      <div className="flex overflow-hidden rounded-xl shadow-lg bg-white h-[170px] hover:shadow-xl transition-shadow">
+        <div className="bg-blue-700 w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+          <img 
+            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            className="w-full h-full object-cover object-center"
+            alt="Membership management"
+          />
+        </div>
+        <div className="w-2/3 p-4 flex flex-col justify-center">
+          <h3 className="font-bold mb-1 text-gray-900">Membership Management</h3>
+          <p className="text-gray-700 text-xs">
+            Manage society members and send real-time updates, all in one centralized platform.
+          </p>
+        </div>
+      </div>
+
+      {/* Collaboration & Discussion Card */}
+      <div className="flex overflow-hidden rounded-xl shadow-lg bg-white h-[170px] hover:shadow-xl transition-shadow">
+        <div className="bg-blue-700 w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+          <img 
+            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            className="w-full h-full object-cover object-center"
+            alt="Collaboration"
+          />
+        </div>
+        <div className="w-2/3 p-4 flex flex-col justify-center">
+          <h3 className="font-bold mb-1 text-gray-900">Collaboration & Discussion</h3>
+          <p className="text-gray-700 text-xs">
+            Foster teamwork with discussion boards and collaborative features for society leaders.
+          </p>
+        </div>
+      </div>
+
+      {/* Real-Time Updates Card */}
+      <div className="flex overflow-hidden rounded-xl shadow-lg bg-white h-[170px] hover:shadow-xl transition-shadow">
+        <div className="bg-blue-700 w-1/3 flex items-stretch rounded-l-xl overflow-hidden">
+          <img 
+            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            className="w-full h-full object-cover object-center"
+            alt="Real-time updates"
+          />
+        </div>
+        <div className="w-2/3 p-4 flex flex-col justify-center">
+          <h3 className="font-bold mb-1 text-gray-900">Real-Time Updates</h3>
+          <p className="text-gray-700 text-xs">
+            Instantly notify members and leaders with real-time announcements and alerts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </section>
   );
-};
-
-export default home;
+}
