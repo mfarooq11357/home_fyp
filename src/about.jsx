@@ -1,7 +1,7 @@
 import React from 'react';
 
-const FeatureCards = () => {
-  const features = [
+const AboutUs = () => {
+  const About = [
     {
       image: 'https://i.ibb.co/pjT6LzG9/Group.png',
       title: 'Event Management',
@@ -31,13 +31,13 @@ const FeatureCards = () => {
           administrators.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="relative rounded-lg rounded-[26px] overflow-hidden shadow-[0_-6px_12px_-4px_rgba(0,0,0,0.1)] h-full">
+          {About.map((About, index) => (
+            <div key={index} className="relative  rounded-[26px] overflow-hidden shadow-[0_-6px_12px_-4px_rgba(0,0,0,0.1)] h-full">
            {/* Upper white part with image */}
           <div className="bg-white p-8 flex justify-center items-center h-40 relative z-10">
             <img 
-              src={feature.image} 
-              alt={feature.title} 
+              src={About.image} 
+              alt={About.title} 
               className="w-42 h-42 object-contain"
             />
            </div>
@@ -47,8 +47,8 @@ const FeatureCards = () => {
    className="bg-[url('https://i.ibb.co/Nd2Nrhq3/Web-Photo-Editor-2.jpg')] w-full bg-center bg-no-repeat pt-10 pb-8 px-6 relative z-10 h-48"
    style={{ backgroundSize: "100% 100%" }}
   >
-    <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-    <p className="text-white opacity-90">{feature.description}</p>
+    <h3 className="text-xl font-semibold text-white mb-2">{About.title}</h3>
+    <p className="text-white opacity-90">{About.description}</p>
   </div>
 </div>
           ))}
@@ -58,4 +58,4 @@ const FeatureCards = () => {
   );
 };
 
-export default FeatureCards;
+export default AboutUs;

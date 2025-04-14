@@ -14,11 +14,11 @@ export default function Footer() {
             {/* Replace this src with your logo image path */}
             <img
               src="https://i.ibb.co/Z4Br5t0/image-removebg-preview-1.png"
-              alt="My Society Logo"
+              alt="SE Society Logo"
               className="w-full h-full object-contain"
             />
           </div>
-              <h3 className="text-lg md:text-xl font-bold text-blue-700">MY SOCIETY</h3>
+              <h3 className="text-lg md:text-xl font-bold text-blue-700">SE SOCIETY</h3>
             </div>
             <p className="text-gray-600 text-xs sm:text-sm md:text-base">
               Organize better. Connect deeper.

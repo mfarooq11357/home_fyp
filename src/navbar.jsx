@@ -27,11 +27,11 @@ export default function Navbar() {
             {/* Replace this src with your logo image path */}
             <img
               src="https://i.ibb.co/Z4Br5t0/image-removebg-preview-1.png"
-              alt="My Society Logo"
+              alt="SE Society Logo"
               className="w-full h-full object-contain"
             />
           </div>
-          <span className="text-xl font-bold text-[#2D51A0]">My Society</span>
+          <span className="text-xl font-bold text-[#2D51A0]">SE Society</span>
         </Link>
 
         {/* Desktop Navigation */}
