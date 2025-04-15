@@ -2,6 +2,8 @@
 
 import { useLocation, useNavigate } from "react-router-dom"
 import { MessageCircle, Calendar, MapPin, Phone, Mail, User, Briefcase, Flag } from "lucide-react"
+import UpcomingEvents from "../components/UpcommingEvents";
+
 
 const PublicProfilePage = () => {
   const location = useLocation()
@@ -20,7 +22,7 @@ const PublicProfilePage = () => {
     <div className="container mx-auto pt-12 py-6 px-4 min-h-screen">
       <div className="flex flex-col lg:flex-row gap-8 relative bg-white p-6">
         {/* Profile Section - 3/5 width on large screens */}
-        <div className="w-full lg:w-3/5 lg:pr-8">
+        <div className="w-full lg:w-4/5 lg:pr-8">
           <h1 className="text-4xl font-bold mb-6 text-gray-800">My Profile</h1>
 
           <div className="flex flex-wrap items-center gap-4 mb-8">
@@ -128,57 +130,15 @@ const PublicProfilePage = () => {
           </div>
         </div>
 
-        {/* Upcoming Events Section - 2/5 width on large screens */}
-        <div className="w-full lg:w-2/5 mt-8 lg:mt-0">
-          <h1 className="text-4xl font-bold mb-6 text-gray-800 flex items-center">
+        <div className="w-full lg:w-1/5 mt-8 lg:mt-0">
+          <h1 className="text-[1.4rem] font-bold mb-6 text-gray-800 flex items-center">
             <Calendar className="mr-2 text-blue-600" />
             Upcoming Events
           </h1>
-
-          <div className="space-y-6">
-            <div className="overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all border border-gray-100">
-              <div className="p-6 bg-white">
-                <h2 className="text-2xl font-bold text-gray-800">Tech fest</h2>
-                <p className="text-blue-600 flex items-center">
-                  <Calendar className="w-4 h-4 mr-1" />
-                  Tuesday, 20 March 2025
-                </p>
-              </div>
-              <div className="relative h-48 sm:h-56 w-full overflow-hidden">
-                <img
-                  src="https://i.ibb.co/1YSzM2hL/image-7.png"
-                  alt="Tech fest event"
-                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-70"></div>
-                <div className="absolute bottom-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  Tech Event
-                </div>
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all border border-gray-100">
-              <div className="p-6 bg-white">
-                <h2 className="text-2xl font-bold text-gray-800">Kheil Tamasha</h2>
-                <p className="text-blue-600 flex items-center">
-                  <Calendar className="w-4 h-4 mr-1" />
-                  Tuesday, 20 March 2025
-                </p>
-              </div>
-              <div className="relative h-48 sm:h-56 w-full overflow-hidden">
-                <img
-                  src="https://i.ibb.co/Zs0rtgG/image-7-1.png"
-                  alt="Kheil Tamasha event"
-                  className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-70"></div>
-                <div className="absolute bottom-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                  Games
-                </div>
-              </div>
-            </div>
-          </div>
+          <UpcomingEvents />
         </div>
+
+
       </div>
     </div>
   )

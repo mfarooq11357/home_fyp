@@ -92,7 +92,7 @@ const EventDetailsPage = () => {
 
         {/* Upcoming Events Section */}
         <div className="w-full lg:w-1/6 mt-8 lg:mt-0">
-          <h1 className="text-2xl font-bold mb-6">Upcoming Events:</h1>
+          <h1 className="text-[1.6rem] font-bold mb-6">Upcoming Events:</h1>
 
           <div className="space-y-6">
             {upcomingEvents.map((upcomingEvent) => (
@@ -202,7 +202,7 @@ export default EventDetailsPage
 
 //         {/* Upcoming Events Section */}
 //         <div className="w-full lg:w-2/5 mt-8 lg:mt-0">
-//           <h1 className="text-2xl font-bold mb-6">Upcoming Events:</h1>
+//           <h1 className="text-[1.6rem] font-bold mb-6">Upcoming Events:</h1>
 
 //           <div className="space-y-6">
 //             {upcomingEvents.map((upcomingEvent) => (

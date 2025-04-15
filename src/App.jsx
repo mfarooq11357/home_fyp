@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import Navbar from './navbar';
+import AuthNavbar from './AuthNavbar'
 import Home from './pages/home';
 import FAQS from './pages/Faqs';
 import About from './pages/about';
@@ -17,12 +18,13 @@ import AllUsersPage from './authorizedPages/allUser';
 import AlumniPage from './authorizedPages/alumniPage';
 import EventDetailsPage from './authorizedPages/EventDetails';
 import EventsPage from './authorizedPages/Events';
-
+import NotificationsPage from './authorizedPages/NotificationsPage';
+import RequestCertificatePage from './authorizedPages/RequestCertificate';
 const App = () => {
   return (
     <Router>
       <div>
-        <Navbar />
+        <AuthNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<FAQS />} />
@@ -37,6 +39,10 @@ const App = () => {
           <Route path="/Alumni" element={<AlumniPage />} />
           <Route path="/Events" element={<EventsPage />} />
           <Route path="/Events/:id" element={<EventDetailsPage />} />
+          <Route path="/Notifications" element={<NotificationsPage />} />
+          <Route path="/request-certificate" element={<RequestCertificatePage />} />
+
+
         </Routes>
         <Footer />
         <ToastContainer 
