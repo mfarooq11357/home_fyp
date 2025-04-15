@@ -10,6 +10,7 @@ const AlumniPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState("")
   const navigate = useNavigate()
   const alumniPerPage = 8
 
@@ -18,11 +19,13 @@ const AlumniPage = () => {
     const fetchAlumni = async () => {
       setLoading(true)
       try {
-        const response = await fetch(
-          `http://localhost:3000/user/alumni?page=${currentPage}&limit=${alumniPerPage}`
-        )
+        let url = `http://localhost:3000/user/alumni?page=${currentPage}&limit=${alumniPerPage}`
+        if (searchQuery) {
+          url = `http://localhost:3000/user/search?name=${encodeURIComponent(searchQuery)}&rollNo=${encodeURIComponent(searchQuery)}&role=alumni&page=${currentPage}&limit=${alumniPerPage}`
+        }
+        const response = await fetch(url)
         const data = await response.json()
-        setAlumni(data.alumni || [])
+        setAlumni(data.alumni || data.users || [])
         setTotalPages(data.totalPages || 1)
       } catch (error) {
         console.error("Error fetching alumni:", error)
@@ -31,7 +34,13 @@ const AlumniPage = () => {
       }
     }
     fetchAlumni()
-  }, [currentPage])
+  }, [currentPage, searchQuery])
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value)
+    setCurrentPage(1) // Reset to first page on search
+  }
 
   // Handle navigation to PublicProfilePage with user data
   const handleViewProfile = (user) => {
@@ -125,7 +134,9 @@ const AlumniPage = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search by name or roll no"
+                value={searchQuery}
+                onChange={handleSearchChange}
                 className="w-full bg-gray-100 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -215,10 +226,6 @@ const AlumniPage = () => {
 }
 
 export default AlumniPage
-
-
-
-
 
 
 

@@ -1,14 +1,19 @@
 "use client"
 
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { MessageCircle, Calendar, MapPin, Phone, Mail, User, Briefcase, Flag } from "lucide-react"
 
 const PublicProfilePage = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const user = location.state?.user
 
   if (!user) {
     return <p>User not found</p>
+  }
+
+  const handleChatClick = () => {
+    navigate(`/chat`, { state: { selectedUser: user } })
   }
 
   return (
@@ -33,7 +38,10 @@ const PublicProfilePage = () => {
                 {user.officialEmail}
               </p>
             </div>
-            <button className="ml-auto bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md transition-all flex items-center gap-2 shadow-md hover:shadow-lg">
+            <button
+              onClick={handleChatClick}
+              className="ml-auto bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md transition-all flex items-center gap-2 shadow-md hover:shadow-lg"
+            >
               <MessageCircle className="w-5 h-5" />
               <span className="font-medium">Chat</span>
             </button>
@@ -47,7 +55,7 @@ const PublicProfilePage = () => {
               </p>
               <p className="font-medium text-gray-800">{user.firstName}</p>
             </div>
-            <div className="bg-gray-50 p-3 rounded-lg hover:shadow-md transition-all">
+            <div className="bg-gray-50 p-3 rounded-lg hover那么，p-4 hover:shadow-md transition-all">
               <p className="text-gray-500 text-sm flex items-center">
                 <User className="w-4 h-4 mr-1" />
                 Last Name
@@ -177,8 +185,6 @@ const PublicProfilePage = () => {
 }
 
 export default PublicProfilePage
-
-
 
 
 

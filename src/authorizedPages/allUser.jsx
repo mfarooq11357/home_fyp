@@ -10,6 +10,7 @@ const AllUsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [filter, setFilter] = useState("all") // "all", "society member", "student"
+  const [searchQuery, setSearchQuery] = useState("")
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
   const usersPerPage = 8
@@ -19,9 +20,12 @@ const AllUsersPage = () => {
     const fetchUsers = async () => {
       setLoading(true)
       try {
-        let url = `http://localhost:3000/user/allUsers?page=${currentPage}&limit=${usersPerPage}`
+        let url = `http://localhost:3000/user/searchByRole?page=${currentPage}&limit=${usersPerPage}`
         if (filter !== "all") {
-          url += `&role=${filter}`
+          url += `&role=${encodeURIComponent(filter)}`
+        }
+        if (searchQuery) {
+          url += `&name=${encodeURIComponent(searchQuery)}&rollNo=${encodeURIComponent(searchQuery)}`
         }
         const response = await fetch(url)
         const data = await response.json()
@@ -34,17 +38,23 @@ const AllUsersPage = () => {
       }
     }
     fetchUsers()
-  }, [currentPage, filter])
+  }, [currentPage, filter, searchQuery])
 
-  // Handle navigation to PublicProfilePage with user data
-  const handleViewProfile = (user) => {
-    navigate(`/PublicProfile`, { state: { user } })
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value)
+    setCurrentPage(1) // Reset to first page on search
   }
 
   // Handle filter change
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter)
     setCurrentPage(1)
+  }
+
+  // Handle navigation to PublicProfilePage with user data
+  const handleViewProfile = (user) => {
+    navigate(`/PublicProfile`, { state: { user } })
   }
 
   // Render fixed number of rows (8), showing "No users found" if empty
@@ -135,7 +145,9 @@ const AllUsersPage = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   type="text"
-                  placeholder="Search"
+                  placeholder="Search by name or roll no"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
                   className="w-full bg-gray-100 rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -253,12 +265,6 @@ const AllUsersPage = () => {
 }
 
 export default AllUsersPage
-
-
-
-
-
-
 
 
 
