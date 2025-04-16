@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Loader from "../components/Loader"
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 
 const EventDetailsPage = () => {
   const [event, setEvent] = useState(null)
@@ -10,28 +12,55 @@ const EventDetailsPage = () => {
   const [loading, setLoading] = useState(true)
   const { id } = useParams()
 
-  // Fetch event details and upcoming events from backend
   useEffect(() => {
     const fetchEventDetails = async () => {
       setLoading(true)
       try {
-        // Fetch event details
         const eventResponse = await fetch(`http://localhost:3000/events/${id}`)
         const eventData = await eventResponse.json()
         setEvent(eventData.event)
 
-        // Fetch upcoming events (limited to 2 for sidebar)
         const upcomingResponse = await fetch("http://localhost:3000/events?page=1&limit=2")
         const upcomingData = await upcomingResponse.json()
         setUpcomingEvents(upcomingData.events || [])
       } catch (error) {
         console.error("Error fetching event details:", error)
+        toast.error("Error fetching event details.")
       } finally {
         setLoading(false)
       }
     }
     fetchEventDetails()
   }, [id])
+
+  const handleBookNow = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast.error('Please log in to register for the event.')
+        return;
+      }
+
+      const response = await fetch('http://localhost:3000/event-registration-requests/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ eventId: id })
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        toast.success('Registration request submitted successfully.')
+      } else {
+        toast.error(data.error || 'Failed to submit registration request.')
+      }
+    } catch (error) {
+      console.error('Error submitting registration request:', error);
+      toast.error('An error occurred while submitting the request.')
+    }
+  };
 
   if (loading) {
     return (
@@ -46,74 +75,78 @@ const EventDetailsPage = () => {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="flex flex-col lg:flex-row gap-8 relative">
-        {/* Event Details Section */}
-        <div className="w-full lg:w-5/6">
-          <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-6">
-            <img src={event.picture || "/placeholder.svg"} alt={event.name} className="w-full h-full object-cover" />
-          </div>
-
-          <h1 className="text-4xl font-bold text-blue-600 mb-4">{event.name}</h1>
-
-          <div className="mb-6">
-            <p className="text-gray-700 mb-4">{event.smallDescription}</p>
-            <p className="text-gray-700">{event.detailedDescription}</p>
-          </div>
-
-          <div className="space-y-4 mb-8">
-            <div>
-              <p className="text-gray-500 font-medium">Venue:</p>
-              <p className="text-xl font-bold">{event.location}</p>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <div className="container mx-auto py-8 px-4">
+        <div className="flex flex-col lg:flex-row gap-8 relative">
+          <div className="w-full lg:w-5/6">
+            <div className="relative h-64 md:h-80 w-full overflow-hidden rounded-xl mb-6">
+              <img src={event.picture || "/placeholder.svg"} alt={event.name} className="w-full h-full object-cover" />
             </div>
-
-            <div>
-              <p className="text-gray-500 font-medium">Date & Time:</p>
-              <p className="text-xl font-bold">{new Date(event.dateTime).toLocaleString()}</p>
+            <h1 className="text-4xl font-bold text-blue-600 mb-4">{event.name}</h1>
+            <div className="mb-6">
+              <p className="text-gray-700 mb-4">{event.smallDescription}</p>
+              <p className="text-gray-700">{event.detailedDescription}</p>
             </div>
-
-            <div>
-              <p className="text-gray-500 font-medium">Ticket price:</p>
-              <p className="text-xl font-bold text-blue-600">{event.registrationFee} Rs Only</p>
-            </div>
-          </div>
-
-          <button className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-md transition-all font-medium text-lg">
-            Buy Now
-          </button>
-        </div>
-
-        {/* Divider - Hidden on mobile */}
-        <div className="hidden lg:flex items-center justify-center">
-          <div className="h-full">
-            <img src="https://i.ibb.co/rBZSJDk/Line-61.png" alt="Divider" className="h-full object-contain" />
-          </div>
-        </div>
-
-        {/* Upcoming Events Section */}
-        <div className="w-full lg:w-1/6 mt-8 lg:mt-0">
-          <h1 className="text-[1.6rem] font-bold mb-6">Upcoming Events:</h1>
-
-          <div className="space-y-6">
-            {upcomingEvents.map((upcomingEvent) => (
-              <div key={upcomingEvent._id} className="bg-white rounded-xl shadow-md overflow-hidden">
-                <div className="p-4">
-                  <h2 className="text-xl font-bold text-gray-800">{upcomingEvent.name}</h2>
-                  <p className="text-blue-600 text-sm">{new Date(upcomingEvent.dateTime).toLocaleString()}</p>
-                </div>
-                <div className="relative h-40 w-full overflow-hidden">
-                  <img
-                    src={upcomingEvent.picture || "/placeholder.svg"}
-                    alt={upcomingEvent.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+            <div className="space-y-4 mb-8">
+              <div>
+                <p className="text-gray-500 font-medium">Venue:</p>
+                <p className="text-xl font-bold">{event.location}</p>
               </div>
-            ))}
+              <div>
+                <p className="text-gray-500 font-medium">Date & Time:</p>
+                <p className="text-xl font-bold">{new Date(event.dateTime).toLocaleString()}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 font-medium">Ticket price:</p>
+                <p className="text-xl font-bold text-blue-600">{event.registrationFee} Rs Only</p>
+              </div>
+            </div>
+            <button
+              onClick={handleBookNow}
+              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-md transition-all font-medium text-lg"
+            >
+              Book Now
+            </button>
+          </div>
+          <div className="hidden lg:flex items-center justify-center">
+            <div className="h-full">
+              <img src="https://i.ibb.co/rBZSJDk/Line-61.png" alt="Divider" className="h-full object-contain" />
+            </div>
+          </div>
+          <div className="w-full lg:w-1/6 mt-8 lg:mt-0">
+            {/* <h1 className="text-[1.6rem] font-bold mb-6">Upcoming Events:</h1>
+            <div className="space-y-6">
+              {upcomingEvents.map((upcomingEvent) => (
+                <div key={upcomingEvent._id} className="bg-white rounded-xl shadow-md overflow-hidden">
+                  <div className="p-4">
+                    <h2 className="text-xl font-bold text-gray-800">{upcomingEvent.name}</h2>
+                    <p className="text-blue-600 text-sm">{new Date(upcomingEvent.dateTime).toLocaleString()}</p>
+                  </div>
+                  <div className="relative h-40 w-full overflow-hidden">
+                    <img
+                      src={upcomingEvent.picture || "/placeholder.svg"}
+                      alt={upcomingEvent.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div> */}
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

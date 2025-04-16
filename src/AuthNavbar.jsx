@@ -19,7 +19,7 @@ const AuthNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMobileDropdown, setShowMobileDropdown] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(3);
+  const [notificationCount, setNotificationCount] = useState();
   const [user, setUser] = useState(null);
   const dropdownRef = useRef(null);
   const profileRef = useRef(null);

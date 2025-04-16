@@ -1,6 +1,6 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";  // Use react-icons for WhatsApp icon
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -50,24 +50,26 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold">CONTACT US</h3>
             <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="bg-[#25D366] p-1.5 rounded-full">
-                <FaWhatsapp size={16} color="#FFFFFF" />
-                </div>
-                <span className="text-gray-600 text-xs sm:text-sm md:text-base">+92 123 3456789</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="bg-[#0088CC] p-1.5 rounded-full">
-                  <Phone size={16} className="text-white" />
-                </div>
-                <span className="text-gray-600 text-xs sm:text-sm md:text-base">+92 123 3456789</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="bg-[#EA4335] p-1.5 rounded-full">
+            <div className="flex items-center gap-2">
+                <div className="bg-blue-800 p-1.5 rounded-full">
                   <Mail size={16} className="text-white" />
                 </div>
-                <span className="text-gray-600 text-xs sm:text-sm md:text-base">example.uog.edu.pk</span>
+                <span className="text-gray-600 text-xs sm:text-sm md:text-base">mfarooq11357@gmail.com</span>
               </div>
+
+              <div className="flex items-center gap-2">
+                <div className="bg-blue-700 p-1.5 rounded-full">
+                  <Phone size={16} className="text-white" />
+                </div>
+                <span className="text-gray-600 text-xs sm:text-sm md:text-base">+92 3157897631</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="bg-blue-600 p-1.5 rounded-full">
+                <FaWhatsapp size={16} color="#FFFFFF" />
+                </div>
+                <span className="text-gray-600 text-xs sm:text-sm md:text-base">+92 3157897631</span>
+              </div>
+
             </div>
           </div>
 
@@ -95,7 +97,7 @@ export default function Footer() {
       {/* Copyright Section */}
       <div className="border-t border-gray-200">
         <div className="container mx-auto px-4 py-3">
-          <p className="text-center text-gray-500 text-xs sm:text-sm">Developed by Muhammad Farooq</p>
+          <p className="text-center text-gray-500 text-xs sm:text-sm">Developed by 💙 Muhammad Farooq 💙</p>
         </div>
       </div>
     </footer>
