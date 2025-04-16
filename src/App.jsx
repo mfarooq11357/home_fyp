@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
+import Chatbot from './components/Chatbot';
 import Navbar from './navbar';
 import AuthNavbar from './AuthNavbar';
 import Home from './pages/home';
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <Router>
       <div>
+      <Chatbot />
         <AuthInitializer />
         {isAuthenticated ? <AuthNavbar /> : <Navbar />}
         <Routes>

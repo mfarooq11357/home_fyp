@@ -47,8 +47,8 @@ const AboutUs = () => {
    className="bg-[url('https://i.ibb.co/Nd2Nrhq3/Web-Photo-Editor-2.jpg')] w-full bg-center bg-no-repeat pt-10 pb-8 px-6 relative z-10 h-48"
    style={{ backgroundSize: "100% 100%" }}
   >
-    <h3 className="text-xl font-semibold text-white mb-2">{About.title}</h3>
-    <p className="text-white opacity-90">{About.description}</p>
+    <h3 className="text-xl font-semibold text-white mb-2 text-center">{About.title}</h3>
+    <p className="text-white opacity-90 text-center">{About.description}</p>
   </div>
 </div>
           ))}

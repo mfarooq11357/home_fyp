@@ -71,8 +71,7 @@ const AuthNavbar = () => {
   // Fallback default image and name if no user details exist
   const userName = user?.firstName || "User Name";
   const userImage =
-    user?.picture ||
-    "https://via.placeholder.com/150"; // Change default URL if needed
+    user?.picture ; // Change default URL if needed
 
   return (
     <nav className="bg-white shadow-sm px-4 py-3 sticky top-0 z-50">
@@ -222,7 +221,7 @@ const AuthNavbar = () => {
             <div>
               <p className="font-medium text-gray-800">{userName}</p>
               {/* Replace with dynamic email if you store it */}
-              <p className="text-sm text-gray-500">{user?.email || "user@example.com"}</p>
+              {/* <p className="text-sm text-gray-500">{user?.officialEmail || "user@example.com"}</p> */}
             </div>
           </div>
 

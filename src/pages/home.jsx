@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link, useNavigate } from "react-router-dom";
+
+
+
 export default function HeroSection() {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -122,15 +126,16 @@ const settings = {
               <span className="block">Empowering Growth</span>
             </h1>
 
-            <p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-lg">
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-lg pb-6">
               Your gateway to seamless event management, meaningful alumni connections, and hassle-free certifications.
             </p>
-
+            <Link to="/signup" >
             <button className="px-6 py-2 border border-[#2D50A1] text-blue-700 rounded-md hover:bg-[#2D50A1] hover:text-white transition-colors duration-300 text-sm sm:text-base">
               Register now
             </button>
+            </Link>
           </div>
-
+          
           {/* Right Content - Image */}
           <div className="w-full md:w-1/2 flex flex-col items-center">
             <div className="relative w-full aspect-[5/3] rounded-lg overflow-hidden shadow-lg">
@@ -179,39 +184,39 @@ const settings = {
     <div className="md:w-1/2 flex flex-col gap-6">
       {/* Event Management Card */}
       <div className="flex overflow-hidden rounded-[26px] shadow-lg bg-white hover:shadow-xl transition-shadow">
-        <div className="w-1/3 flex-shrink-0  overflow-hidden">
+        <div className="w-[40%]  lg:w-1/3  flex-shrink-0  overflow-hidden">
           <img 
-            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            src="https://i.ibb.co/MDxc1sw9/Capture-Picsart-Ai-Image-Enhancer.png" 
             className="w-full h-full object-contain object-center bg-gray-100 "
             alt="Event management"
           />
         </div>
         <div className="w-2/3 p-4 flex flex-col justify-center">
-          <h3 className="font-bold mb-1 text-gray-900">Event Management</h3>
-          <p className="text-gray-700 text-xs">
+          <h3 className="font-bold mb-1 text-gray-900 lg:text-[26px]">Event Management</h3>
+          <p className="text-gray-700 text-xs lg:text-[16px] lg:text-text-xs">
             Plan, organize, and track events effortlessly with our intuitive calendar.
           </p>
         </div>
       </div>
             {/* Event Management Card */}
             <div className="flex overflow-hidden rounded-[26px] shadow-lg bg-white hover:shadow-xl transition-shadow">
-        <div className="w-1/3 flex-shrink-0  overflow-hidden">
+        <div className="w-[40%]  lg:w-1/3  flex-shrink-0  overflow-hidden">
           <img 
-            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            src="https://i.ibb.co/8n2FTWXf/Web-Photo-Editor-4.jpg" 
             className="w-full h-full object-contain object-center bg-gray-100 "
             alt="Event management"
           />
         </div>
         <div className="w-2/3 p-4 flex flex-col justify-center">
-          <h3 className="font-bold mb-1 text-gray-900">Event Management</h3>
-          <p className="text-gray-700 text-xs">
-            Plan, organize, and track events effortlessly with our intuitive calendar.
+          <h3 className="font-bold mb-1 text-gray-900 lg:text-[26px]">Membership Management</h3>
+          <p className="text-gray-700 text-xs lg:text-[16px] lg:text-text-xs">
+          Manage society members and send real-time updates, all in one centralized platform.
           </p>
         </div>
       </div>
             {/* Event Management Card */}
             <div className="flex overflow-hidden rounded-[26px] shadow-lg bg-white hover:shadow-xl transition-shadow">
-        <div className="w-1/3 flex-shrink-0  overflow-hidden">
+        <div className="w-[40%]  lg:w-1/3  flex-shrink-0  overflow-hidden">
           <img 
             src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
             className="w-full h-full object-contain object-center bg-gray-100 "
@@ -219,9 +224,9 @@ const settings = {
           />
         </div>
         <div className="w-2/3 p-4 flex flex-col justify-center">
-          <h3 className="font-bold mb-1 text-gray-900">Event Management</h3>
-          <p className="text-gray-700 text-xs">
-            Plan, organize, and track events effortlessly with our intuitive calendar.
+          <h3 className="font-bold mb-1 text-gray-900 lg:text-[26px]">Recognition & Achievements</h3>
+          <p className="text-gray-700 text-xs lg:text-[16px] lg:text-text-xs">
+          Celebrate society milestones with badges, leaderboards, and recognition programs.
           </p>
         </div>
       </div>
@@ -232,49 +237,49 @@ const settings = {
     <div className="lg:pt-24 md:w-1/2 flex flex-col gap-6">
       {/* Membership Management Card */}
       <div className="flex overflow-hidden rounded-[26px] shadow-lg bg-white hover:shadow-xl transition-shadow">
-        <div className="w-1/3 flex-shrink-0  overflow-hidden">
+        <div className="w-[40%]  lg:w-1/3  flex-shrink-0  overflow-hidden">
           <img 
-            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            src="https://i.ibb.co/fzskhqxT/Web-Photo-Editor-3.jpg" 
             className="w-full h-full object-contain object-center bg-gray-100 "
             alt="Membership management"
           />
         </div>
         <div className="w-2/3 p-4 flex flex-col justify-center">
-          <h3 className="font-bold mb-1 text-gray-900">Membership Management</h3>
-          <p className="text-gray-700 text-xs">
-            Manage society members and send real-time updates, all in one centralized platform.
+          <h3 className="font-bold mb-1 text-gray-900 lg:text-[26px]">Collaboration & Discussion</h3>
+          <p className="text-gray-700 text-xs lg:text-[16px] lg:text-text-xs">
+          Foster teamwork with discussion boards and collaborative features for society leaders.
           </p>
         </div>
       </div>
             {/* Event Management Card */}
             <div className="flex overflow-hidden rounded-[26px] shadow-lg bg-white hover:shadow-xl transition-shadow">
-        <div className="w-1/3 flex-shrink-0  overflow-hidden">
+        <div className="w-[40%]  lg:w-1/3  flex-shrink-0  overflow-hidden">
           <img 
-            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            src="https://i.ibb.co/YBSKvbKG/Capture-Picsart-Ai-Image-Enhancer-1.png" 
             className="w-full h-full object-contain object-center bg-gray-100 "
             alt="Event management"
           />
         </div>
         <div className="w-2/3 p-4 flex flex-col justify-center">
-          <h3 className="font-bold mb-1 text-gray-900">Event Management</h3>
-          <p className="text-gray-700 text-xs">
-            Plan, organize, and track events effortlessly with our intuitive calendar.
+          <h3 className="font-bold mb-1 text-gray-900 lg:text-[26px]">Personalized Views</h3>
+          <p className="text-gray-700 text-xs lg:text-[16px] lg:text-text-xs">
+          Streamlined, role-based access tailored for admins, leaders, and members.
           </p>
         </div>
       </div>
             {/* Event Management Card */}
             <div className="flex overflow-hidden rounded-[26px] shadow-lg bg-white hover:shadow-xl transition-shadow">
-        <div className="w-1/3 flex-shrink-0  overflow-hidden">
+        <div className="w-[40%]  lg:w-1/3  flex-shrink-0  overflow-hidden">
           <img 
-            src="https://i.ibb.co/hJHH1cr3/Web-Photo-Editor.jpg" 
+            src="https://i.ibb.co/NnrQrxp6/Capture-Picsart-Ai-Image-Enhancer-2.png" 
             className="w-full h-full object-contain object-center bg-gray-100 "
             alt="Event management"
           />
         </div>
         <div className="w-2/3 p-4 flex flex-col justify-center">
-          <h3 className="font-bold mb-1 text-gray-900">Event Management</h3>
-          <p className="text-gray-700 text-xs">
-            Plan, organize, and track events effortlessly with our intuitive calendar.
+          <h3 className="font-bold mb-1 text-gray-900 lg:text-[26px]">Real-Time Updates</h3>
+          <p className="text-gray-700 text-xs lg:text-[16px] lg:text-text-xs ">
+          Instantly notify members and leaders with real-time announcements and alerts.
           </p>
         </div>
       </div>
