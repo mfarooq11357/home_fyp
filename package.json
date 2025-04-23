@@ -22,6 +22,7 @@
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "emotion": "^11.0.0",
     "framer-motion": "^11.11.8",
     "jwt-decode": "^4.0.0",

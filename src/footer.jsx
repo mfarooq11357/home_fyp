@@ -80,7 +80,7 @@ export default function Footer() {
             <p className="text-gray-600 text-xs sm:text-sm md:text-base">
               Subscribe to our newsletter and get the latest updates on events, alumni news, and more!
             </p>
-            <div className="flex flex-col sm:flex-row gap-2">
+            {/* <div className="flex flex-col sm:flex-row gap-2">
               <input 
                 type="email" 
                 placeholder="Your email" 
@@ -89,7 +89,7 @@ export default function Footer() {
               <button className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-md text-xs sm:text-sm">
                 Subscribe
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -1,0 +1,266 @@
+"use client"
+
+import { useState, useRef } from "react"
+import { X, ImageIcon, Video, Smile, Save } from "lucide-react"
+import { toast } from "react-toastify"
+import crypto from "crypto-js"
+
+const EditPostModal = ({ post, onClose, onPostUpdated }) => {
+  const [postText, setPostText] = useState(post.description || "")
+  const [selectedFiles, setSelectedFiles] = useState([])
+  const [previewItems, setPreviewItems] = useState(post.media || [])
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const fileInputRef = useRef(null)
+
+  // Cloudinary credentials
+  const cloudName = "diane1tak"
+  const apiKey = "595487194871695"
+  const apiSecret = "mxA23kc58ZihQbGwPuM5mNicdFo"
+  const uploadPreset = "sesmanagement"
+
+  // Generate a signed signature for secure upload
+  const generateSignature = (paramsToSign, apiSecret) => {
+    const sorted = Object.keys(paramsToSign)
+      .sort()
+      .map((key) => `${key}=${paramsToSign[key]}`)
+      .join("&")
+    return crypto.SHA1(sorted + apiSecret).toString()
+  }
+
+  // Handle file selection and upload to Cloudinary
+  const handleFileSelect = async (e) => {
+    const files = Array.from(e.target.files)
+    if (files.length === 0) return
+
+    setSelectedFiles((prev) => [...prev, ...files])
+    setIsUploading(true)
+
+    // Show toast for upload start
+    toast.info("Uploading media...", {
+      theme: "light",
+    })
+
+    // Upload each file
+    const uploadPromises = files.map(async (file) => {
+      if (!file.type.startsWith("image/") && !file.type.startsWith("video/")) {
+        return null
+      }
+
+      const timestamp = Math.floor(Date.now() / 1000)
+      const params = { timestamp, upload_preset: uploadPreset }
+      const signature = generateSignature(params, apiSecret)
+
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("api_key", apiKey)
+      formData.append("upload_preset", uploadPreset)
+      formData.append("timestamp", timestamp)
+      formData.append("signature", signature)
+
+      try {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+          method: "POST",
+          body: formData,
+        })
+        const data = await res.json()
+
+        if (data.secure_url) {
+          return {
+            url: data.secure_url,
+            type: file.type.startsWith("video/") ? "video" : "image",
+            name: file.name,
+          }
+        }
+      } catch (error) {
+        console.error("Cloudinary upload error:", error)
+      }
+      return null
+    })
+
+    try {
+      const results = await Promise.all(uploadPromises)
+      const validItems = results.filter((item) => item !== null)
+      setPreviewItems((prev) => [...prev, ...validItems])
+
+      // Show success toast
+      if (validItems.length > 0) {
+        toast.success(`${validItems.length} file(s) uploaded successfully!`, {
+          theme: "light",
+        })
+      }
+    } catch (error) {
+      console.error("Error uploading files:", error)
+      toast.error("Failed to upload media", {
+        theme: "light",
+      })
+    } finally {
+      setIsUploading(false)
+    }
+  }
+
+  // Remove a selected/preview item
+  const removeFile = (index) => {
+    setPreviewItems((prev) => prev.filter((_, i) => i !== index))
+    toast.info("Media removed", {
+      theme: "light",
+    })
+  }
+
+  // Submit the updated post
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!postText.trim() && previewItems.length === 0) {
+      toast.error("Post cannot be empty", {
+        theme: "light",
+      })
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      const token = localStorage.getItem("token")
+      const response = await fetch(`http://localhost:3000/posts/${post._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          description: postText,
+          media: previewItems.map((item) => ({ type: item.type, url: item.url })),
+        }),
+      })
+
+      if (response.ok) {
+        const updatedPost = await response.json()
+        toast.success("Post updated successfully!", {
+          theme: "light",
+        })
+        if (onPostUpdated) {
+          onPostUpdated(updatedPost)
+        }
+      } else {
+        throw new Error("Failed to update post")
+      }
+    } catch (error) {
+      console.error("Error updating post:", error)
+      toast.error("Failed to update post", {
+        theme: "light",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 overflow-hidden">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-800">Edit Post</h2>
+          <button onClick={onClose} className="p-1 rounded-full hover:bg-gray-100 transition-colors">
+            <X size={24} className="text-gray-500" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="p-4">
+            <textarea
+              placeholder="What's on your mind?"
+              className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              rows={5}
+              value={postText}
+              onChange={(e) => setPostText(e.target.value)}
+            />
+
+            {isUploading && (
+              <div className="mt-3 flex items-center justify-center p-4 bg-gray-50 rounded-lg">
+                <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-600 mr-3"></div>
+                <p className="text-gray-600">Uploading media...</p>
+              </div>
+            )}
+
+            {previewItems.length > 0 && (
+              <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {previewItems.map((file, index) => (
+                  <div key={index} className="relative group">
+                    {file.type === "image" ? (
+                      <img
+                        src={file.url || "/placeholder.svg"}
+                        alt={file.name || "Image"}
+                        className="h-24 w-full object-cover rounded-md"
+                      />
+                    ) : (
+                      <video src={file.url} className="h-24 w-full object-cover rounded-md" controls={false} />
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => removeFile(index)}
+                      className="absolute top-1 right-1 bg-black bg-opacity-50 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="p-4 border-t border-gray-200 flex justify-between items-center">
+            <div className="flex space-x-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current.click()}
+                className="flex items-center text-gray-600 hover:text-blue-600 p-2 rounded-md hover:bg-gray-100 transition-colors"
+                disabled={isUploading}
+              >
+                <ImageIcon size={20} className="mr-1" />
+                <span className="hidden sm:inline">Photo</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current.click()}
+                className="flex items-center text-gray-600 hover:text-blue-600 p-2 rounded-md hover:bg-gray-100 transition-colors"
+                disabled={isUploading}
+              >
+                <Video size={20} className="mr-1" />
+                <span className="hidden sm:inline">Video</span>
+              </button>
+              <button
+                type="button"
+                className="flex items-center text-gray-600 hover:text-blue-600 p-2 rounded-md hover:bg-gray-100 transition-colors"
+              >
+                <Smile size={20} className="mr-1" />
+                <span className="hidden sm:inline">Feeling</span>
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileSelect}
+                multiple
+                accept="image/*,video/*"
+                className="hidden"
+                disabled={isUploading}
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isSubmitting || isUploading || (!postText.trim() && previewItems.length === 0)}
+              className={`px-4 py-2 rounded-md flex items-center ${
+                isSubmitting || isUploading || (!postText.trim() && previewItems.length === 0)
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+              }`}
+            >
+              <Save size={18} className="mr-1" />
+              {isSubmitting ? "Saving..." : "Save Changes"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default EditPostModal

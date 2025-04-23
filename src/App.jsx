@@ -26,6 +26,9 @@ import RequestCertificatePage from './authorizedPages/RequestCertificate';
 import AuthInitializer from './redux/AuthInitializer';
 import PrivateRoute from './redux/PrivateRoute';
 import PublicRoute from './redux/PublicRoute';
+import Feed from './authorizedPages/Feed';
+import PostDetail from './authorizedPages/PostDetail';
+import PostLikes from './authorizedPages/PostLikes';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -54,6 +57,11 @@ const App = () => {
           <Route path="/Events/:id" element={<PrivateRoute><EventDetailsPage /></PrivateRoute>} />
           <Route path="/Notifications" element={<PrivateRoute><NotificationsPage /></PrivateRoute>} />
           <Route path="/request-certificate" element={<PrivateRoute><RequestCertificatePage /></PrivateRoute>} />
+
+            {/* New Feed Routes */}
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/feed/post/:postId" element={<PostDetail />} />
+            <Route path="/feed/post/:postId/likes" element={<PostLikes />} />
         </Routes>
         <Footer />
         <ToastContainer 
