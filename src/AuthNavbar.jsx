@@ -89,6 +89,15 @@ const AuthNavbar = () => {
 
         <div className="hidden md:flex items-center">
           <div className="flex space-x-8 mr-8">
+          <Link
+              to="/feed"
+              className={`${navLinkClass} ${
+                isActive("/feed") &&
+                "border-b-2 border-blue-600 text-blue-600"
+              }`}
+            >
+              Feed
+            </Link>
             <Link
               to="/alumni"
               className={`${navLinkClass} ${
@@ -226,6 +235,16 @@ const AuthNavbar = () => {
           </div>
 
           <div className="flex flex-col space-y-4">
+          <Link
+              to="/feed"
+              className={`${navLinkClass} ${
+                isActive("/feed") &&
+                "border-b-2 border-blue-600 text-blue-600"
+              } text-lg`}
+              onClick={toggleMenu}
+            >
+              Feed
+            </Link>
             <Link
               to="/alumni"
               className={`${navLinkClass} ${

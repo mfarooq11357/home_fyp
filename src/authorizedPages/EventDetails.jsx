@@ -4,12 +4,20 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Loader from "../components/Loader"
 import { ToastContainer, toast } from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css"
+import { FaStar, FaRegStar, FaStarHalfAlt, FaUser } from "react-icons/fa"
 
 const EventDetailsPage = () => {
   const [event, setEvent] = useState(null)
   const [upcomingEvents, setUpcomingEvents] = useState([])
   const [loading, setLoading] = useState(true)
+  const [reviews, setReviews] = useState([])
+  const [showReviewModal, setShowReviewModal] = useState(false)
+  const [userReview, setUserReview] = useState({
+    rating: 5,
+    comment: "",
+  })
+  const [isRegistered, setIsRegistered] = useState(false)
   const { id } = useParams()
 
   useEffect(() => {
@@ -23,6 +31,29 @@ const EventDetailsPage = () => {
         const upcomingResponse = await fetch("http://localhost:3000/events?page=1&limit=2")
         const upcomingData = await upcomingResponse.json()
         setUpcomingEvents(upcomingData.events || [])
+
+        // Fetch reviews for this event
+        const reviewsResponse = await fetch(`http://localhost:3000/reviews/event/${id}`)
+        const reviewsData = await reviewsResponse.json()
+        setReviews(reviewsData.reviews || [])
+
+        // Check if user is registered for this event
+        const token = localStorage.getItem("token")
+        if (token) {
+          try {
+            const userResponse = await fetch("http://localhost:3000/user/me", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+            const userData = await userResponse.json()
+            if (userData.user && eventData.event.participants) {
+              setIsRegistered(eventData.event.participants.includes(userData.user._id))
+            }
+          } catch (error) {
+            console.error("Error checking registration status:", error)
+          }
+        }
       } catch (error) {
         console.error("Error fetching event details:", error)
         toast.error("Error fetching event details.")
@@ -35,32 +66,104 @@ const EventDetailsPage = () => {
 
   const handleBookNow = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token")
       if (!token) {
-        toast.error('Please log in to register for the event.')
-        return;
+        toast.error("Please log in to register for the event.")
+        return
       }
 
-      const response = await fetch('http://localhost:3000/event-registration-requests/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/event-registration-requests/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ eventId: id })
-      });
+        body: JSON.stringify({ eventId: id }),
+      })
 
-      const data = await response.json();
+      const data = await response.json()
       if (response.ok) {
-        toast.success('Registration request submitted successfully.')
+        toast.success("Registration request submitted successfully.")
       } else {
-        toast.error(data.error || 'Failed to submit registration request.')
+        toast.error(data.error || "Failed to submit registration request.")
       }
     } catch (error) {
-      console.error('Error submitting registration request:', error);
-      toast.error('An error occurred while submitting the request.')
+      console.error("Error submitting registration request:", error)
+      toast.error("An error occurred while submitting the request.")
     }
-  };
+  }
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault()
+
+    try {
+      const token = localStorage.getItem("token")
+      if (!token) {
+        toast.error("Please log in to submit a review.")
+        setShowReviewModal(false)
+        return
+      }
+
+      const response = await fetch("http://localhost:3000/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          eventId: id,
+          rating: userReview.rating,
+          comment: userReview.comment,
+        }),
+      })
+
+      const data = await response.json()
+      if (response.ok) {
+        toast.success("Review submitted successfully!")
+
+        // Refresh reviews
+        const reviewsResponse = await fetch(`http://localhost:3000/reviews/event/${id}`)
+        const reviewsData = await reviewsResponse.json()
+        setReviews(reviewsData.reviews || [])
+
+        // Update event data to get new rating
+        const eventResponse = await fetch(`http://localhost:3000/events/${id}`)
+        const eventData = await eventResponse.json()
+        setEvent(eventData.event)
+
+        setShowReviewModal(false)
+        setUserReview({ rating: 5, comment: "" })
+      } else {
+        toast.error(data.message || "Failed to submit review.")
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error)
+      toast.error("An error occurred while submitting your review.")
+    }
+  }
+
+  const renderStars = (rating) => {
+    const stars = []
+    const fullStars = Math.floor(rating)
+    const hasHalfStar = rating % 1 >= 0.5
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />)
+      } else if (i === fullStars + 1 && hasHalfStar) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />)
+      } else {
+        stars.push(<FaRegStar key={i} className="text-yellow-400" />)
+      }
+    }
+
+    return stars
+  }
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
 
   if (loading) {
     return (
@@ -112,12 +215,85 @@ const EventDetailsPage = () => {
                 <p className="text-xl font-bold text-blue-600">{event.registrationFee} Rs Only</p>
               </div>
             </div>
-            <button
-              onClick={handleBookNow}
-              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-md transition-all font-medium text-lg"
-            >
-              Book Now
-            </button>
+            {isRegistered ? (
+              <button className="bg-green-600 text-white py-3 px-8 rounded-md transition-all font-medium text-lg cursor-default">
+                Registered
+              </button>
+            ) : (
+              <button
+                onClick={handleBookNow}
+                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-md transition-all font-medium text-lg"
+              >
+                Book Now
+              </button>
+            )}
+
+            {/* Reviews Section */}
+            <div className="mt-16">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl font-bold">Reviews & Ratings</h2>
+                <button
+                  onClick={() => setShowReviewModal(true)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-all"
+                >
+                  Leave a Review
+                </button>
+              </div>
+
+              {/* Rating Summary */}
+              <div className="bg-gray-50 rounded-lg p-6 mb-8 shadow-sm">
+                <div className="flex items-center gap-4">
+                  <div className="text-5xl font-bold text-blue-600">
+                    {event.totalRating ? event.totalRating.toFixed(1) : "0.0"}
+                  </div>
+                  <div>
+                    <div className="flex mb-1">{renderStars(event.totalRating || 0)}</div>
+                    <p className="text-gray-500">Based on {event.totalReviews || 0} reviews</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Reviews List */}
+              <div className="space-y-6">
+                {reviews.length > 0 ? (
+                  reviews.map((review) => (
+                    <div key={review._id} className="border-b pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                          {review.user.picture ? (
+                            <img
+                              src={review.user.picture || "/placeholder.svg"}
+                              alt={review.user.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-blue-100 text-blue-600">
+                              <FaUser size={24} />
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="font-medium">{review.user.name}</h3>
+                              <div className="flex items-center gap-2 mt-1">
+                                <div className="flex">{renderStars(review.rating)}</div>
+                                <span className="text-sm text-gray-500">{formatDate(review.createdAt)}</span>
+                              </div>
+                            </div>
+                          </div>
+                          {review.comment && <p className="mt-3 text-gray-700">{review.comment}</p>}
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-8 bg-gray-50 rounded-lg">
+                    <p className="text-gray-500">No reviews yet. Be the first to leave a review!</p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
           <div className="hidden lg:flex items-center justify-center">
             <div className="h-full">
@@ -146,6 +322,61 @@ const EventDetailsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Review Modal */}
+      {showReviewModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Leave a Review</h2>
+            <form onSubmit={handleSubmitReview}>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Rating</label>
+                <div className="flex gap-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setUserReview({ ...userReview, rating: star })}
+                      className="text-2xl focus:outline-none"
+                    >
+                      {star <= userReview.rating ? (
+                        <FaStar className="text-yellow-400" />
+                      ) : (
+                        <FaRegStar className="text-yellow-400" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="comment" className="block text-gray-700 mb-2">
+                  Comment (Optional)
+                </label>
+                <textarea
+                  id="comment"
+                  rows="4"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Share your experience..."
+                  value={userReview.comment}
+                  onChange={(e) => setUserReview({ ...userReview, comment: e.target.value })}
+                ></textarea>
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowReviewModal(false)}
+                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                  Submit Review
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   )
 }

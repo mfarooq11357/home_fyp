@@ -241,7 +241,7 @@ const Post = ({ post, onPostDeleted }) => {
   // Navigation functions
   const goToPostDetails = () => navigate(`/feed/post/${post._id}`)
   const goToLikesPage = () => navigate(`/feed/post/${post._id}/likes`)
-  const goToUserProfile = (userId) => navigate(`/profile/${userId}`)
+  const goToUserProfile = (userId) => navigate(`/PublicProfile/${userId}`)
 
   // Handle comment submission
   const handleCommentSubmit = async (e) => {
