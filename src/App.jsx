@@ -12,7 +12,7 @@ import FAQS from './pages/Faqs';
 import About from './pages/about';
 import Login from './pages/login';
 import Signup from './pages/Signup';
-import Footer from './Footer';
+import Footer from './footer';
 import ProfilePage from './authorizedPages/profilePage';
 import ProfileEditPage from './authorizedPages/EditProfile';
 import PublicProfilePage from './authorizedPages/PublicprofilePage';
