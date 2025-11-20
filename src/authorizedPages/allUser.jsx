@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Search, ChevronLeft, ChevronRight, Eye } from "lucide-react"
@@ -20,7 +20,7 @@ const AllUsersPage = () => {
     const fetchUsers = async () => {
       setLoading(true)
       try {
-        let url = `http://localhost:3000/user/searchByRole?page=${currentPage}&limit=${usersPerPage}`
+        let url = `https://ses-management-system-nu.vercel.app/user/searchByRole?page=${currentPage}&limit=${usersPerPage}`
         if (filter !== "all") {
           url += `&role=${encodeURIComponent(filter)}`
         }
@@ -284,7 +284,7 @@ export default AllUsersPage
 //     const fetchUsers = async () => {
 //       setLoading(true)
 //       try {
-//         let url = `http://localhost:3000/user/searchByRole?page=${currentPage}&limit=${usersPerPage}`
+//         let url = `https://ses-management-system-nu.vercel.app/user/searchByRole?page=${currentPage}&limit=${usersPerPage}`
 //         if (filter !== "all") {
 //           url += `&role=${encodeURIComponent(filter)}`
 //         }
@@ -807,3 +807,4 @@ export default AllUsersPage
 // }
 
 // export default AllUsersPage
+

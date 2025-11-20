@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useRef } from "react"
 import { Search, MoreVertical, ArrowLeft, Image as ImageIcon, Check, Send } from "lucide-react"
@@ -35,7 +35,7 @@ const ChatPage = () => {
   // Initialize Socket.IO and fetch users
   useEffect(() => {
     const initSocket = async () => {
-      const newSocket = io("http://localhost:3000", {
+      const newSocket = io("https://ses-management-system-nu.vercel.app", {
         query: { token },
       })
       setSocket(newSocket)
@@ -57,7 +57,7 @@ const ChatPage = () => {
   // Fetch chat users
   const fetchChatUsers = async () => {
     try {
-      const response = await fetch("http://localhost:3000/messages/chat-users", {
+      const response = await fetch("https://ses-management-system-nu.vercel.app/messages/chat-users", {
         headers: { Authorization: `Bearer ${token}` },
       })
       const data = await response.json()
@@ -120,7 +120,7 @@ const ChatPage = () => {
   // Fetch chat history and mark unseen messages as seen
   const fetchChatHistory = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3000/messages/history/${userId}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/messages/history/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       const data = await response.json()
@@ -178,7 +178,7 @@ const ChatPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/messages/send", {
+      const response = await fetch("https://ses-management-system-nu.vercel.app/messages/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -475,14 +475,14 @@ export default ChatPage
 //   // Initialize Socket.IO and fetch users
 //   useEffect(() => {
 //     const initSocket = async () => {
-//       const newSocket = io("http://localhost:3000", {
+//       const newSocket = io("https://ses-management-system-nu.vercel.app", {
 //         query: { token },
 //       })
 //       setSocket(newSocket)
 
 //       // Fetch all users for chat list
 //       try {
-//         const response = await fetch("http://localhost:3000/user/allUsers?page=1&limit=10", {
+//         const response = await fetch("https://ses-management-system-nu.vercel.app/user/allUsers?page=1&limit=10", {
 //           headers: { Authorization: `Bearer ${token}` },
 //         })
 //         const data = await response.json()
@@ -541,7 +541,7 @@ export default ChatPage
 //   // Fetch chat history
 //   const fetchChatHistory = async (userId) => {
 //     try {
-//       const response = await fetch(`http://localhost:3000/messages/history/${userId}`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/messages/history/${userId}`, {
 //         headers: { Authorization: `Bearer ${token}` },
 //       })
 //       const data = await response.json()
@@ -577,7 +577,7 @@ export default ChatPage
 //     }
 
 //     try {
-//       const response = await fetch("http://localhost:3000/messages/send", {
+//       const response = await fetch("https://ses-management-system-nu.vercel.app/messages/send", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -1039,3 +1039,4 @@ export default ChatPage
 // )
 
 // export default ChatPage
+

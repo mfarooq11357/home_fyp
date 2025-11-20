@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Calendar } from 'lucide-react'
@@ -23,7 +23,7 @@ const Feed = () => {
       setInitialLoading(true)
       try {
         const token = localStorage.getItem("token")
-        const response = await fetch(`http://localhost:3000/posts?page=1&limit=${postsPerPage}`, {
+        const response = await fetch(`https://ses-management-system-nu.vercel.app/posts?page=1&limit=${postsPerPage}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 
@@ -66,7 +66,7 @@ const Feed = () => {
     try {
       const nextPage = page + 1
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts?page=${nextPage}&limit=${postsPerPage}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts?page=${nextPage}&limit=${postsPerPage}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
@@ -140,7 +140,7 @@ const Feed = () => {
               const fetchPosts = async () => {
                 try {
                   const token = localStorage.getItem("token")
-                  const response = await fetch(`http://localhost:3000/posts?page=1&limit=${postsPerPage}`, {
+                  const response = await fetch(`https://ses-management-system-nu.vercel.app/posts?page=1&limit=${postsPerPage}`, {
                     headers: { Authorization: `Bearer ${token}` },
                   })
           
@@ -266,7 +266,7 @@ export default Feed
 //       setLoading(true)
 //       try {
 //         const token = localStorage.getItem('token')
-//         const response = await fetch(`http://localhost:3000/posts?page=${page}&limit=${postsPerPage}`, {
+//         const response = await fetch(`https://ses-management-system-nu.vercel.app/posts?page=${page}&limit=${postsPerPage}`, {
 //           headers: { 'Authorization': `Bearer ${token}` },
 //         })
 //         const data = await response.json()
@@ -961,3 +961,4 @@ export default Feed
 // }
 
 // export default Feed
+

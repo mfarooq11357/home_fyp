@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useRef } from "react"
 import { ImageIcon, Video, Smile, X, Send } from "lucide-react"
@@ -122,7 +122,7 @@ const CreatePost = ({ onPostCreated }) => {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:3000/posts", {
+      const response = await fetch("https://ses-management-system-nu.vercel.app/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -350,7 +350,7 @@ export default CreatePost
 
 //     try {
 //       const token = localStorage.getItem('token');
-//       const response = await fetch('http://localhost:3000/posts', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/posts', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -609,3 +609,4 @@ export default CreatePost
 // }
 
 // export default CreatePost
+

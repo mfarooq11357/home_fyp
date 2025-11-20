@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Save, X, Calendar, MapPin, Phone, Mail, User, Briefcase, Flag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const ProfileEditPage = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/user/profile', {
+        const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -107,7 +107,7 @@ const ProfileEditPage = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/user/profile', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -382,7 +382,7 @@ export default ProfileEditPage;
 
 //     const fetchUserData = async () => {
 //       try {
-//         const response = await fetch('http://localhost:3000/user/profile', {
+//         const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
 //           headers: {
 //             'Authorization': `Bearer ${token}`,
 //           },
@@ -464,7 +464,7 @@ export default ProfileEditPage;
 //     setLoading(true);
 //     try {
 //       const token = localStorage.getItem('token');
-//       const response = await fetch('http://localhost:3000/user/profile', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
 //         method: 'PUT',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -764,7 +764,7 @@ export default ProfileEditPage;
 
 //     const fetchUserData = async () => {
 //       try {
-//         const response = await fetch('http://localhost:3000/user/profile', {
+//         const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
 //           headers: {
 //             'Authorization': `Bearer ${token}`,
 //           },
@@ -791,7 +791,7 @@ export default ProfileEditPage;
 //     setLoading(true);
 //     try {
 //       const token = localStorage.getItem('token');
-//       const response = await fetch('http://localhost:3000/user/profile', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
 //         method: 'PUT',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -1334,3 +1334,4 @@ export default ProfileEditPage;
 // }
 
 // export default ProfileEditPage
+

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Search, ChevronLeft, ChevronRight, Eye } from "lucide-react"
@@ -19,9 +19,9 @@ const AlumniPage = () => {
     const fetchAlumni = async () => {
       setLoading(true)
       try {
-        let url = `http://localhost:3000/user/alumni?page=${currentPage}&limit=${alumniPerPage}`
+        let url = `https://ses-management-system-nu.vercel.app/user/alumni?page=${currentPage}&limit=${alumniPerPage}`
         if (searchQuery) {
-          url = `http://localhost:3000/user/search?name=${encodeURIComponent(searchQuery)}&rollNo=${encodeURIComponent(searchQuery)}&role=alumni&page=${currentPage}&limit=${alumniPerPage}`
+          url = `https://ses-management-system-nu.vercel.app/user/search?name=${encodeURIComponent(searchQuery)}&rollNo=${encodeURIComponent(searchQuery)}&role=alumni&page=${currentPage}&limit=${alumniPerPage}`
         }
         const response = await fetch(url)
         const data = await response.json()
@@ -209,9 +209,9 @@ export default AlumniPage
 //     const fetchAlumni = async () => {
 //       setLoading(true)
 //       try {
-//         let url = `http://localhost:3000/user/alumni?page=${currentPage}&limit=${alumniPerPage}`
+//         let url = `https://ses-management-system-nu.vercel.app/user/alumni?page=${currentPage}&limit=${alumniPerPage}`
 //         if (searchQuery) {
-//           url = `http://localhost:3000/user/search?name=${encodeURIComponent(searchQuery)}&rollNo=${encodeURIComponent(searchQuery)}&role=alumni&page=${currentPage}&limit=${alumniPerPage}`
+//           url = `https://ses-management-system-nu.vercel.app/user/search?name=${encodeURIComponent(searchQuery)}&rollNo=${encodeURIComponent(searchQuery)}&role=alumni&page=${currentPage}&limit=${alumniPerPage}`
 //         }
 //         const response = await fetch(url)
 //         const data = await response.json()
@@ -703,3 +703,4 @@ export default AlumniPage
 // }
 
 // export default AlumniPage
+

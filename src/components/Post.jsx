@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useRef, useEffect } from "react"
 import { Heart, MessageCircle, Share2, ThumbsUp, ChevronRight, ChevronLeft, MoreVertical, Edit, Trash2 } from 'lucide-react'
@@ -130,7 +130,7 @@ const Post = ({ post, onPostDeleted }) => {
   const selectReaction = async (reactionType) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${post._id}/likes`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/likes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +185,7 @@ const Post = ({ post, onPostDeleted }) => {
   const handleShare = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${post._id}/shares`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/shares`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -212,7 +212,7 @@ const Post = ({ post, onPostDeleted }) => {
   const handleDeletePost = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${post._id}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -250,7 +250,7 @@ const Post = ({ post, onPostDeleted }) => {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${post._id}/comments`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -314,7 +314,7 @@ const Post = ({ post, onPostDeleted }) => {
               {post.author.name || `${post.author.firstName} ${post.author.lastName}`}
             </h3>
             <p className="text-sm text-gray-500">
-              {post.author.role} •{" "}
+              {post.author.role} â€¢{" "}
               {post.createdAt && !isNaN(new Date(post.createdAt))
                 ? formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })
                 : "Unknown time"}
@@ -430,7 +430,7 @@ const Post = ({ post, onPostDeleted }) => {
       )}
 
       {/* Post Stats - First row with likes and comments counts */}
-      <div className="px-4 py-2 flex justify-between items-center border-t border-gray-100">
+      <div className="lg:px-28 px-12 py-2 flex justify-between items-center border-t border-gray-100">
         <div className="flex items-center space-x-2">
           <button className="flex items-center hover:text-blue-600 transition-colors" onClick={goToLikesPage}>
             <ThumbsUp size={16} className={`mr-1 ${isLiked ? "text-blue-600 fill-blue-600" : "text-gray-500"}`} />
@@ -441,7 +441,7 @@ const Post = ({ post, onPostDeleted }) => {
           <button className="hover:text-blue-600 transition-colors" onClick={goToPostDetails}>
             <span>{commentsCount} comments</span>
           </button>
-          <span>{sharesCount} shares</span>
+          {/* <span>{sharesCount} shares</span> */}
         </div>
       </div>
 
@@ -627,7 +627,7 @@ export default Post
 //     const checkIfLiked = async () => {
 //       try {
 //         const token = localStorage.getItem('token')
-//         const response = await fetch(`http://localhost:3000/posts/${post._id}/isLiked`, {
+//         const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/isLiked`, {
 //           headers: {
 //             'Authorization': `Bearer ${token}`,
 //           },
@@ -729,7 +729,7 @@ export default Post
 //   const selectReaction = async (reactionType) => {
 //     try {
 //       const token = localStorage.getItem('token')
-//       const response = await fetch(`http://localhost:3000/posts/${post._id}/likes`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/likes`, {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -754,7 +754,7 @@ export default Post
 //   const handleShare = async () => {
 //     try {
 //       const token = localStorage.getItem('token')
-//       const response = await fetch(`http://localhost:3000/posts/${post._id}/share`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/share`, {
 //         method: 'POST',
 //         headers: {
 //           'Authorization': `Bearer ${token}`,
@@ -784,7 +784,7 @@ export default Post
     
 //     try {
 //       const token = localStorage.getItem('token')
-//       const response = await fetch(`http://localhost:3000/posts/${post._id}/comments`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}/comments`, {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -836,7 +836,7 @@ export default Post
 //             {post.author.name || `${post.author.firstName} ${post.author.lastName}`}
 //           </h3>
 //           <p className="text-sm text-gray-500">
-//             {post.author.role} • {
+//             {post.author.role} â€¢ {
 //               post.createdAt && !isNaN(new Date(post.createdAt))
 //                 ? formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })
 //                 : "Unknown time"
@@ -1197,7 +1197,7 @@ export default Post
 //             {post.author.name}
 //           </h3>
 //           <p className="text-sm text-gray-500">
-//             {post.author.role} • {post.timeAgo}
+//             {post.author.role} â€¢ {post.timeAgo}
 //           </p>
 //         </div>
 //       </div>
@@ -1517,7 +1517,7 @@ export default Post
 //           >
 //             {post.author.name}
 //           </h3>
-//           <p className="text-sm text-gray-500">{post.author.role} • {post.timeAgo}</p>
+//           <p className="text-sm text-gray-500">{post.author.role} â€¢ {post.timeAgo}</p>
 //         </div>
 //       </div>
 
@@ -1695,3 +1695,4 @@ export default Post
 // }
 
 // export default Post
+

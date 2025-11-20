@@ -1,4 +1,4 @@
-// pages/LoginPage.jsx
+﻿// pages/LoginPage.jsx
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
@@ -37,7 +37,7 @@ export default function LoginPage() {
         officialEmail: data.email,
         password: data.password,
       };
-      const response = await fetch('http://localhost:3000/user/login', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData),
@@ -69,7 +69,7 @@ export default function LoginPage() {
 
   const sendOtp = async (token) => {
     try {
-      const response = await fetch('http://localhost:3000/user/send-otp', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/send-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export default function LoginPage() {
     }
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/user/verify-otp', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ export default function LoginPage() {
           <div className="w-full max-w-md">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-[#2D50A1] mb-2">Login</h1>
-              <p className="text-gray-600">Welcome back — let's get organized.</p>
+              <p className="text-gray-600">Welcome back â€” let's get organized.</p>
             </div>
 
             {!otpSent ? (
@@ -329,7 +329,7 @@ export default function LoginPage() {
 //         officialEmail: data.email,
 //         password: data.password,
 //       };
-//       const response = await fetch('http://localhost:3000/user/login', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/login', {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify(loginData),
@@ -357,7 +357,7 @@ export default function LoginPage() {
 
 //   const sendOtp = async (token) => {
 //     try {
-//       const response = await fetch('http://localhost:3000/user/send-otp', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/send-otp', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -392,7 +392,7 @@ export default function LoginPage() {
 //     }
 //     try {
 //       const token = localStorage.getItem('token');
-//       const response = await fetch('http://localhost:3000/user/verify-otp', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/verify-otp', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -443,7 +443,7 @@ export default function LoginPage() {
 //           <div className="w-full max-w-md">
 //             <div className="text-center mb-8">
 //               <h1 className="text-3xl font-bold text-[#2D50A1] mb-2">Login</h1>
-//               <p className="text-gray-600">Welcome back — let's get organized.</p>
+//               <p className="text-gray-600">Welcome back â€” let's get organized.</p>
 //             </div>
 
 //             {!otpSent ? (
@@ -609,7 +609,7 @@ export default function LoginPage() {
 //         <div className="w-full max-w-md">
 //           <div className="text-center mb-8">
 //             <h1 className="text-3xl font-bold text-[#2D50A1] mb-2">Login</h1>
-//             <p className="text-gray-600">Welcome back — let's get organized.</p>
+//             <p className="text-gray-600">Welcome back â€” let's get organized.</p>
 //           </div>
 
 //           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

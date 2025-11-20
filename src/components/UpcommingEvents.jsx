@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -12,7 +12,7 @@ const UpcomingEvents = () => {
     const fetchUpcomingEvents = async () => {
       setLoading(true)
       try {
-        const response = await fetch("http://localhost:3000/events?page=1&limit=2")
+        const response = await fetch("https://ses-management-system-nu.vercel.app/events?page=1&limit=2")
         const data = await response.json()
         setUpcomingEvents(data.events || [])
       } catch (error) {

@@ -1,4 +1,4 @@
-
+﻿
 
 
 "use client"
@@ -57,7 +57,7 @@ const Comment = ({ comment, postId, onReply, onCommentUpdated, onCommentDeleted,
     if (!replyText.trim()) return
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const Comment = ({ comment, postId, onReply, onCommentUpdated, onCommentDeleted,
     if (!editText.trim()) return
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +118,7 @@ const Comment = ({ comment, postId, onReply, onCommentUpdated, onCommentDeleted,
   const handleDeleteComment = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -144,7 +144,7 @@ const Comment = ({ comment, postId, onReply, onCommentUpdated, onCommentDeleted,
     try {
       const token = localStorage.getItem("token")
       const method = isLiked ? "DELETE" : "POST"
-      const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}/likes`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}/likes`, {
         method,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -389,7 +389,7 @@ export default Comment
 //     const checkIfLiked = async () => {
 //       try {
 //         const token = localStorage.getItem("token")
-//         const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}/isLiked`, {
+//         const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}/isLiked`, {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
 //           },
@@ -430,7 +430,7 @@ export default Comment
 //     if (!replyText.trim()) return
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -462,7 +462,7 @@ export default Comment
 //     if (!editText.trim()) return
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}`, {
 //         method: "PUT",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -491,7 +491,7 @@ export default Comment
 //   const handleDeleteComment = async () => {
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}`, {
 //         method: "DELETE",
 //         headers: {
 //           Authorization: `Bearer ${token}`,
@@ -516,7 +516,7 @@ export default Comment
 //   const handleLikeComment = async () => {
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/comments/${comment._id}/like`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments/${comment._id}/like`, {
 //         method: "POST",
 //         headers: {
 //           Authorization: `Bearer ${token}`,
@@ -735,7 +735,7 @@ export default Comment
 //     if (!replyText.trim()) return
 //     try {
 //       const token = localStorage.getItem('token')
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -1034,3 +1034,4 @@ export default Comment
 // }
 
 // export default Comment
+

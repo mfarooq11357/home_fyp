@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useRef } from "react"
 import { X, ImageIcon, Video, Smile, Save } from "lucide-react"
@@ -121,7 +121,7 @@ const EditPostModal = ({ post, onClose, onPostUpdated }) => {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${post._id}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${post._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -264,3 +264,4 @@ const EditPostModal = ({ post, onClose, onPostUpdated }) => {
 }
 
 export default EditPostModal
+

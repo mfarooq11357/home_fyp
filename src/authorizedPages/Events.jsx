@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+﻿import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Loader from "../components/Loader"
 import { Search, ChevronLeft, ChevronRight, Eye } from "lucide-react"
@@ -16,7 +16,7 @@ const EventsPage = () => {
     const fetchEvents = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`http://localhost:3000/events?page=${currentPage}&limit=${eventsPerPage}`)
+        const response = await fetch(`https://ses-management-system-nu.vercel.app/events?page=${currentPage}&limit=${eventsPerPage}`)
         const data = await response.json()
         setEvents(data.events || [])
         setTotalPages(data.totalPages || 1)
@@ -233,3 +233,4 @@ export default EventsPage
 // };
 
 // export default EventsPage;
+

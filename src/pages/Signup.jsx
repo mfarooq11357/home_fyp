@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Mail, Lock, User, Phone, BadgeIcon } from 'lucide-react';
 import { Link, useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ function SignupPage() {
         password: data.password,
         role: 'student',
       };
-      const response = await fetch('http://localhost:3000/user/signup', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(signupData),
@@ -71,7 +71,7 @@ function SignupPage() {
 
   const sendOtp = async (token) => {
     try {
-      const response = await fetch('http://localhost:3000/user/send-otp', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/send-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ function SignupPage() {
     }
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/user/verify-otp', {
+      const response = await fetch('https://ses-management-system-nu.vercel.app/user/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -479,7 +479,7 @@ export default SignupPage;
 //         gender: data.gender,
 //         password: data.password,
 //       };
-//       const response = await fetch('http://localhost:3000/user/signup', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/signup', {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify(signupData),
@@ -512,7 +512,7 @@ export default SignupPage;
 
 //   const sendOtp = async (token) => {
 //     try {
-//       const response = await fetch('http://localhost:3000/user/send-otp', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/send-otp', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -547,7 +547,7 @@ export default SignupPage;
 //     }
 //     try {
 //       const token = localStorage.getItem('token');
-//       const response = await fetch('http://localhost:3000/user/verify-otp', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/verify-otp', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -919,7 +919,7 @@ export default SignupPage;
 //         gender: data.gender,
 //         password: data.password,
 //       };
-//       const response = await fetch('http://localhost:3000/user/signup', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/signup', {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify(signupData),
@@ -947,7 +947,7 @@ export default SignupPage;
 
 //   const sendOtp = async (token) => {
 //     try {
-//       const response = await fetch('http://localhost:3000/user/send-otp', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/send-otp', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -982,7 +982,7 @@ export default SignupPage;
 //     }
 //     try {
 //       const token = localStorage.getItem('token');
-//       const response = await fetch('http://localhost:3000/user/verify-otp', {
+//       const response = await fetch('https://ses-management-system-nu.vercel.app/user/verify-otp', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json',
@@ -1631,3 +1631,4 @@ export default SignupPage;
 // }
 
 // export default SignupPage;
+

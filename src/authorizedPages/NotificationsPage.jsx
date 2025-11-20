@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { Bell } from "lucide-react"
@@ -18,7 +18,7 @@ const NotificationsPage = () => {
         }
 
         const response = await fetch(
-          "http://localhost:3000/event-registration-requests/requests",
+          "https://ses-management-system-nu.vercel.app/event-registration-requests/requests",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ const NotificationsPage = () => {
     try {
       const token = localStorage.getItem("token")
       const response = await fetch(
-        `http://localhost:3000/event-registration-requests/requests/${requestId}`,
+        `https://ses-management-system-nu.vercel.app/event-registration-requests/requests/${requestId}`,
         {
           method: "PUT",
           headers: {
@@ -69,7 +69,7 @@ const NotificationsPage = () => {
     try {
       const token = localStorage.getItem("token")
       const response = await fetch(
-        `http://localhost:3000/event-registration-requests/requests/${requestId}`,
+        `https://ses-management-system-nu.vercel.app/event-registration-requests/requests/${requestId}`,
         {
           method: "PUT",
           headers: {
@@ -365,3 +365,4 @@ export default NotificationsPage
 // }
 
 // export default NotificationsPage
+

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import { FileText, CheckCircle } from "lucide-react";
@@ -13,7 +13,7 @@ const RequestCertificatePage = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        'http://localhost:3000/certificateRequestRoutes/request-certificate',
+        'https://ses-management-system-nu.vercel.app/certificateRequestRoutes/request-certificate',
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -137,4 +137,5 @@ const RequestCertificatePage = () => {
 };
 
 export default RequestCertificatePage;
+
 

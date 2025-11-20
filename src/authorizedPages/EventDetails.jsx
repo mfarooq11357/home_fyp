@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -24,16 +24,16 @@ const EventDetailsPage = () => {
     const fetchEventDetails = async () => {
       setLoading(true)
       try {
-        const eventResponse = await fetch(`http://localhost:3000/events/${id}`)
+        const eventResponse = await fetch(`https://ses-management-system-nu.vercel.app/events/${id}`)
         const eventData = await eventResponse.json()
         setEvent(eventData.event)
 
-        const upcomingResponse = await fetch("http://localhost:3000/events?page=1&limit=2")
+        const upcomingResponse = await fetch("https://ses-management-system-nu.vercel.app/events?page=1&limit=2")
         const upcomingData = await upcomingResponse.json()
         setUpcomingEvents(upcomingData.events || [])
 
         // Fetch reviews for this event
-        const reviewsResponse = await fetch(`http://localhost:3000/reviews/event/${id}`)
+        const reviewsResponse = await fetch(`https://ses-management-system-nu.vercel.app/reviews/event/${id}`)
         const reviewsData = await reviewsResponse.json()
         setReviews(reviewsData.reviews || [])
 
@@ -41,7 +41,7 @@ const EventDetailsPage = () => {
         const token = localStorage.getItem("token")
         if (token) {
           try {
-            const userResponse = await fetch("http://localhost:3000/user/me", {
+            const userResponse = await fetch("https://ses-management-system-nu.vercel.app/user/me", {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -72,7 +72,7 @@ const EventDetailsPage = () => {
         return
       }
 
-      const response = await fetch("http://localhost:3000/event-registration-requests/register", {
+      const response = await fetch("https://ses-management-system-nu.vercel.app/event-registration-requests/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const EventDetailsPage = () => {
         return
       }
 
-      const response = await fetch("http://localhost:3000/reviews", {
+      const response = await fetch("https://ses-management-system-nu.vercel.app/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,12 +122,12 @@ const EventDetailsPage = () => {
         toast.success("Review submitted successfully!")
 
         // Refresh reviews
-        const reviewsResponse = await fetch(`http://localhost:3000/reviews/event/${id}`)
+        const reviewsResponse = await fetch(`https://ses-management-system-nu.vercel.app/reviews/event/${id}`)
         const reviewsData = await reviewsResponse.json()
         setReviews(reviewsData.reviews || [])
 
         // Update event data to get new rating
-        const eventResponse = await fetch(`http://localhost:3000/events/${id}`)
+        const eventResponse = await fetch(`https://ses-management-system-nu.vercel.app/events/${id}`)
         const eventData = await eventResponse.json()
         setEvent(eventData.event)
 
@@ -492,3 +492,4 @@ export default EventDetailsPage
 // }
 
 // export default EventDetailsPage
+

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Edit, Calendar, MapPin, Phone, Mail, User, Briefcase, Flag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -20,7 +20,7 @@ const ProfilePage = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/user/profile', {
+        const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -221,7 +221,7 @@ export default ProfilePage;
 
 //     const fetchUserData = async () => {
 //       try {
-//         const response = await fetch('http://localhost:3000/user/profile', {
+//         const response = await fetch('https://ses-management-system-nu.vercel.app/user/profile', {
 //           headers: {
 //             'Authorization': `Bearer ${token}`,
 //           },
@@ -605,3 +605,4 @@ export default ProfilePage;
 // }
 
 // export default ProfilePage
+

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
@@ -50,12 +50,12 @@ const PostDetail = () => {
         const token = localStorage.getItem("token")
 
         // Fetch post details
-        const postResponse = await fetch(`http://localhost:3000/posts/${postId}`, {
+        const postResponse = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 
         // Fetch comments
-        const commentsResponse = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+        const commentsResponse = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 
@@ -116,7 +116,7 @@ const PostDetail = () => {
 
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -218,7 +218,7 @@ const PostDetail = () => {
   const selectReaction = async (reactionType) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}/likes`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/likes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -252,7 +252,7 @@ const PostDetail = () => {
   const handleShare = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}/shares`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/shares`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -283,7 +283,7 @@ const PostDetail = () => {
   const handleDeletePost = async () => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+      const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -369,7 +369,7 @@ const PostDetail = () => {
                     {post.author.name}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    {post.author.role} • {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+                    {post.author.role} â€¢ {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
                   </p>
                 </div>
               </div>
@@ -673,12 +673,12 @@ export default PostDetail
 //         const token = localStorage.getItem("token")
 
 //         // Fetch post details
-//         const postResponse = await fetch(`http://localhost:3000/posts/${postId}`, {
+//         const postResponse = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}`, {
 //           headers: { Authorization: `Bearer ${token}` },
 //         })
 
 //         // Fetch comments
-//         const commentsResponse = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//         const commentsResponse = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //           headers: { Authorization: `Bearer ${token}` },
 //         })
 
@@ -739,7 +739,7 @@ export default PostDetail
 
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -841,7 +841,7 @@ export default PostDetail
 //   const selectReaction = async (reactionType) => {
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/likes`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/likes`, {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -876,7 +876,7 @@ export default PostDetail
 //   const handleShare = async () => {
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}/shares`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/shares`, {
 //         method: "POST",
 //         headers: {
 //           Authorization: `Bearer ${token}`,
@@ -908,7 +908,7 @@ export default PostDetail
 //   const handleDeletePost = async () => {
 //     try {
 //       const token = localStorage.getItem("token")
-//       const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+//       const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}`, {
 //         method: "DELETE",
 //         headers: {
 //           Authorization: `Bearer ${token}`,
@@ -995,7 +995,7 @@ export default PostDetail
 //                     {post.author.name}
 //                   </h3>
 //                   <p className="text-sm text-gray-500">
-//                     {post.author.role} • {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+//                     {post.author.role} â€¢ {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
 //                   </p>
 //                 </div>
 //               </div>
@@ -1286,10 +1286,10 @@ export default PostDetail
 //         setLoading(true)
 //         try {
 //           const token = localStorage.getItem('token')
-//           const postResponse = await fetch(`http://localhost:3000/posts/${postId}`, {
+//           const postResponse = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}`, {
 //             headers: { 'Authorization': `Bearer ${token}` },
 //           })
-//           const commentsResponse = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//           const commentsResponse = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //             headers: { 'Authorization': `Bearer ${token}` },
 //           })
 //           const postData = await postResponse.json()
@@ -1316,7 +1316,7 @@ export default PostDetail
 //       if (!commentText.trim()) return
 //       try {
 //         const token = localStorage.getItem('token')
-//         const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//         const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //           method: 'POST',
 //           headers: {
 //             'Content-Type': 'application/json',
@@ -1337,7 +1337,7 @@ export default PostDetail
 //     const handleReply = async (commentId, replyText) => {
 //       try {
 //         const token = localStorage.getItem('token')
-//         const response = await fetch(`http://localhost:3000/posts/${postId}/comments`, {
+//         const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/comments`, {
 //           method: 'POST',
 //           headers: {
 //             'Content-Type': 'application/json',
@@ -1359,7 +1359,7 @@ export default PostDetail
 //     const selectReaction = async (reactionType) => {
 //       try {
 //         const token = localStorage.getItem('token')
-//         const response = await fetch(`http://localhost:3000/posts/${postId}/likes`, {
+//         const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/likes`, {
 //           method: 'POST',
 //           headers: {
 //             'Content-Type': 'application/json',
@@ -1416,7 +1416,7 @@ export default PostDetail
 //                     {post.author.name}
 //                   </h3>
 //                   <p className="text-sm text-gray-500">
-//                     {post.author.role} • {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
+//                     {post.author.role} â€¢ {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
 //                   </p>
 //                 </div>
 //               </div>
@@ -1883,7 +1883,7 @@ export default PostDetail
 //                   {post.author.name}
 //                 </h3>
 //                 <p className="text-sm text-gray-500">
-//                   {post.author.role} • {post.timeAgo}
+//                   {post.author.role} â€¢ {post.timeAgo}
 //                 </p>
 //               </div>
 //             </div>
@@ -2431,7 +2431,7 @@ export default PostDetail
 //                   {post.author.name}
 //                 </h3>
 //                 <p className="text-sm text-gray-500">
-//                   {post.author.role} • {post.timeAgo}
+//                   {post.author.role} â€¢ {post.timeAgo}
 //                 </p>
 //               </div>
 //             </div>
@@ -2585,3 +2585,4 @@ export default PostDetail
 // }
 
 // export default PostDetail
+

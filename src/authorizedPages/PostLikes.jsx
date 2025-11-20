@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
@@ -20,7 +20,7 @@ const PostLikes = () => {
       setLoading(true)
       try {
         const token = localStorage.getItem("token")
-        const response = await fetch(`http://localhost:3000/posts/${postId}/likes`, {
+        const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/likes`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 
@@ -228,7 +228,7 @@ export default PostLikes
 //         setLoading(true)
 //         try {
 //           const token = localStorage.getItem('token')
-//           const response = await fetch(`http://localhost:3000/posts/${postId}/likes`, {
+//           const response = await fetch(`https://ses-management-system-nu.vercel.app/posts/${postId}/likes`, {
 //             headers: { 'Authorization': `Bearer ${token}` },
 //           })
 //           const data = await response.json()
@@ -941,3 +941,4 @@ export default PostLikes
 // }
 
 // export default PostLikes
+
